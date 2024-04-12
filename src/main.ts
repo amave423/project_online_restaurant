@@ -1,96 +1,96 @@
 let originalContainer: HTMLElement | null = null;
 
 const dishes = [
-    { name: "Апероль", image: "image/italydishes/aperol.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Брускетта", image: "image/italydishes/brusketta.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Карбонара", image: "image/italydishes/carbonara.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Эспрессо", image: "image/italydishes/espresso.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Каноли", image: "image/italydishes/kanoli.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Капрезе", image: "image/italydishes/kapreze.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Лазанья", image: "image/italydishes/laz.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Маргарита", image: "image/italydishes/margarita.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Негрони", image: "image/italydishes/negroni.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Панна Кота", image: "image/italydishes/panna-kotta.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Ризотто", image: "image/italydishes/rizotto.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Тирамису", image: "image/italydishes/tiramisu.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Заварной крем", image: "image/italydishes/zavar-krem.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Брускетта", image: "image/italydishes/brusketta.jpg", price: 100, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Каноли", image: "image/italydishes/kanoli.jpg", price: 120, category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Апероль", image: "image/italydishes/aperol.jpg", price: 110, category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Карбонара", image: "image/italydishes/carbonara.jpg", price: 170, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Эспрессо", image: "image/italydishes/espresso.jpg", price: 103, category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Капрезе", image: "image/italydishes/kapreze.jpg", price: 160, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Лазанья", image: "image/italydishes/laz.jpg", price: 109, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Маргарита", image: "image/italydishes/margarita.jpg", price: 10, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Негрони", image: "image/italydishes/negroni.jpg", price: 50, category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Панна Кота", image: "image/italydishes/panna-kotta.jpg", price: 200, category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Ризотто", image: "image/italydishes/rizotto.jpg", price: 140, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Тирамису", image: "image/italydishes/tiramisu.jpg", price: 500, category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Заварной крем", image: "image/italydishes/zavar-krem.jpg", price: 900, category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
 ];
 
 const americanDishes = [
+    { name: "Каноли", image: "image/americadishes/chili.jpg", price: 900, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Капрезе", image: "image/americadishes/coocie.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Апероль", image: "image/americadishes/beer.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Брускетта", image: "image/americadishes/cake.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Карбонара", image: "image/americadishes/cheesecake.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Эспрессо", image: "image/americadishes/chiken.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Каноли", image: "image/americadishes/chili.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Капрезе", image: "image/americadishes/coocie.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Лазанья", image: "image/americadishes/humburger.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Брускетта", image: "image/americadishes/cake.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Карбонара", image: "image/americadishes/cheesecake.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Эспрессо", image: "image/americadishes/chiken.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Лазанья", image: "image/americadishes/humburger.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Маргарита", image: "image/americadishes/lemonade.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Негрони", image: "image/americadishes/margo.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Панна Кота", image: "image/americadishes/pasta.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Ризотто", image: "image/americadishes/pie.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Тирамису", image: "image/americadishes/rebra.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Заварной крем", image: "image/americadishes/steik.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Панна Кота", image: "image/americadishes/pasta.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Ризотто", image: "image/americadishes/pie.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Тирамису", image: "image/americadishes/rebra.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Заварной крем", image: "image/americadishes/steik.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
 ];
 
 const dishesFrance = [
-    { name: "Апероль", image: "image/francedishes/bugi.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Брускетта", image: "image/francedishes/coco.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Апероль", image: "image/francedishes/bugi.jpg", price: 900, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Брускетта", image: "image/francedishes/coco.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Эспрессо", image: "image/francedishes/confit.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Каноли", image: "image/francedishes/croissant.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Карбонара", image: "image/francedishes/cognac.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Эспрессо", image: "image/francedishes/confit.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Каноли", image: "image/francedishes/croissant.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Капрезе", image: "image/francedishes/karri.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Лазанья", image: "image/francedishes/krep.jpg", category: "Десерт",  description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Маргарита", image: "image/francedishes/makaron.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Негрони", image: "image/francedishes/raclette.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Капрезе", image: "image/francedishes/karri.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Лазанья", image: "image/francedishes/krep.jpg", category: "Десерты",  description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Маргарита", image: "image/francedishes/makaron.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Негрони", image: "image/francedishes/raclette.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Панна Кота", image: "image/francedishes/shamp.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Ризотто", image: "image/francedishes/tart.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Ризотто", image: "image/francedishes/tart.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Тирамису", image: "image/francedishes/wine.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Заварной крем", image: "image/francedishes/ystrica.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Заварной крем", image: "image/francedishes/ystrica.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
 ];
 
 const dishesJapan = [
-    { name: "Апероль", image: "image/japandishes/doraiaki.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Брускетта", image: "image/japandishes/mochi.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Карбонара", image: "image/japandishes/okasi_tiram.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Эспрессо", image: "image/japandishes/ramen.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Эспрессо", image: "image/japandishes/ramen.jpg", price: 900, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Апероль", image: "image/japandishes/doraiaki.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Брускетта", image: "image/japandishes/mochi.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Карбонара", image: "image/japandishes/okasi_tiram.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Каноли", image: "image/japandishes/sake.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Капрезе", image: "image/japandishes/sashimi.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Лазанья", image: "image/japandishes/suchi.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Маргарита", image: "image/japandishes/tayaki.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Капрезе", image: "image/japandishes/sashimi.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Лазанья", image: "image/japandishes/suchi.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Маргарита", image: "image/japandishes/tayaki.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Негрони", image: "image/japandishes/tea.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Панна Кота", image: "image/japandishes/tempura.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Ризотто", image: "image/japandishes/tonkacu.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Тирамису", image: "image/japandishes/udon.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Панна Кота", image: "image/japandishes/tempura.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Ризотто", image: "image/japandishes/tonkacu.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Тирамису", image: "image/japandishes/udon.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Заварной крем", image: "image/japandishes/umeshu.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
 ];
 
 const dishesMexico = [
-    { name: "Апероль", image: "image/mexicodishes/arroz.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Эспрессо", image: "image/mexicodishes/enchi.jpg", price: 900, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Апероль", image: "image/mexicodishes/arroz.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Брускетта", image: "image/mexicodishes/beer.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Карбонара", image: "image/mexicodishes/churros.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Эспрессо", image: "image/mexicodishes/enchi.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Каноли", image: "image/mexicodishes/fada.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Капрезе", image: "image/mexicodishes/flan.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Лазанья", image: "image/mexicodishes/guakamole.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Карбонара", image: "image/mexicodishes/churros.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Каноли", image: "image/mexicodishes/fada.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Капрезе", image: "image/mexicodishes/flan.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Лазанья", image: "image/mexicodishes/guakamole.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Маргарита", image: "image/mexicodishes/horhata.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Негрони", image: "image/mexicodishes/kessa.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Панна Кота", image: "image/mexicodishes/pozole.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Ризотто", image: "image/mexicodishes/takos.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Тирамису", image: "image/mexicodishes/tres.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Негрони", image: "image/mexicodishes/kessa.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Панна Кота", image: "image/mexicodishes/pozole.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Ризотто", image: "image/mexicodishes/takos.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Тирамису", image: "image/mexicodishes/tres.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
 ];
 
 const dishesTai = [
+    { name: "Капрезе", image: "image/taidishes/pad.jpg", price: 900, category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Лазанья", image: "image/taidishes/pud.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Апероль", image: "image/taidishes/kokos.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Брускетта", image: "image/taidishes/krapao.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Брускетта", image: "image/taidishes/krapao.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Карбонара", image: "image/taidishes/lemon.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Эспрессо", image: "image/taidishes/liovan.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Каноли", image: "image/taidishes/mango.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Капрезе", image: "image/taidishes/pad.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Лазанья", image: "image/taidishes/pud.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Маргарита", image: "image/taidishes/roti.jpg", category: "Десерт", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Негрони", image: "image/taidishes/somtam.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Эспрессо", image: "image/taidishes/liovan.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Каноли", image: "image/taidishes/mango.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Маргарита", image: "image/taidishes/roti.jpg", category: "Десерты", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Негрони", image: "image/taidishes/somtam.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
     { name: "Панна Кота", image: "image/taidishes/tai.jpg", category: "Напитки", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
-    { name: "Ризотто", image: "image/taidishes/tomiam.jpg", category: "Основное блюдо", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
+    { name: "Ризотто", image: "image/taidishes/tomiam.jpg", category: "Основные блюда", description: "Сочетание итальянских каперов и зеленых оливок, пропитанных оливковым маслом и лимонным соком, приправленное свежемолотым перцем и травами." },
 ];
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -151,38 +151,70 @@ function showCards() {
     cardsContainer.className = "container";
 
     dishes.forEach(dish => {
+        const cardContainer = document.createElement("div"); 
+        cardContainer.className = "card-container";
+    
         const card = document.createElement("div");
         card.className = "dish-card";
         card.setAttribute("data-category", dish.category);
-
+    
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "img-container";
+    
         const img = document.createElement("img");
         img.src = dish.image;
         img.alt = dish.name;
-
+    
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         overlay.textContent = dish.name;
-
+    
         const descriptionOverlay = document.createElement("div");
         descriptionOverlay.className = "description-overlay";
         descriptionOverlay.textContent = dish.description;
-        descriptionOverlay.style.display = "none";
-
-        card.addEventListener("mouseenter", function () {
-            descriptionOverlay.style.display = "block";
-        });
-
-        card.addEventListener("mouseleave", function () {
-            descriptionOverlay.style.display = "none";
-        });
-
-        card.appendChild(img);
+    
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
         card.appendChild(overlay);
         card.appendChild(descriptionOverlay);
+    
+        cardContainer.appendChild(card);
+    
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = `В корзину`;
+        addToCartButton.className = "add-to-cart-button";
 
-        cardsContainer.appendChild(card);
+        const priceSpan = document.createElement("span");
+        priceSpan.textContent = `${dish.price} ₽`;
+        priceSpan.className = "price"; 
+
+        addToCartButton.appendChild(document.createElement("br")); 
+        addToCartButton.appendChild(priceSpan);
+
+        addToCartButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            priceSpan.style.display = "none";
+            addToCartButton.classList.add("clicked");
+        
+            setTimeout(function() {
+                addToCartButton.classList.remove("clicked");
+            }, 1000);
+        
+            setTimeout(function() {
+                priceSpan.style.display = "inline";
+                addToBasket(dish);
+            }, 1000);
+        
+            console.log(`Добавить ${dish.name} в корзину`);
+            event.stopPropagation();
+        });
+        
+    
+        cardContainer.appendChild(addToCartButton);
+    
+        cardsContainer.appendChild(cardContainer);
     });
-
+    
     const existingCardsContainer = document.querySelector(".container");
     if (existingCardsContainer) {
         existingCardsContainer.replaceWith(cardsContainer);
@@ -238,16 +270,20 @@ function filterCards(category: string) {
         selectedButton.classList.add("selected");
     }
 
-    const cards = document.querySelectorAll(".dish-card");
-    cards.forEach(card => {
-        const cardCategory = card.getAttribute("data-category");
+    const cardContainers = document.querySelectorAll(".card-container") as NodeListOf<HTMLElement>; 
+    cardContainers.forEach(container => {
+        const cardCategory = container.querySelector(".dish-card")?.getAttribute("data-category");
+        const basketButton = container.querySelector(".add-to-cart-button") as HTMLElement; 
         if (category === "all" || !cardCategory || cardCategory === category) {
-            card.classList.remove("hidden");
+            container.style.display = "block";
+            basketButton.style.display = "block";
         } else {
-            card.classList.add("hidden");
+            container.style.display = "none";
+            basketButton.style.display = "none";
         }
     });
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const americaCard = document.getElementById("america-card");
@@ -305,41 +341,67 @@ function showAmericanDishes() {
     cardsContainer.className = "container";
 
     americanDishes.forEach(dish => {
+        const cardContainer = document.createElement("div"); 
+        cardContainer.className = "card-container";
+    
         const card = document.createElement("div");
         card.className = "dish-card";
         card.setAttribute("data-category", dish.category);
-
+    
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "img-container";
+    
         const img = document.createElement("img");
         img.src = dish.image;
         img.alt = dish.name;
-
+    
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         overlay.textContent = dish.name;
-
+    
         const descriptionOverlay = document.createElement("div");
         descriptionOverlay.className = "description-overlay";
         descriptionOverlay.textContent = dish.description;
-        descriptionOverlay.style.display = "none";
-
-        card.addEventListener("mouseenter", function () {
-            descriptionOverlay.style.display = "block";
-        });
-
-        card.addEventListener("mouseleave", function () {
-            descriptionOverlay.style.display = "none";
-        });
-
-        card.appendChild(img);
+    
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
         card.appendChild(overlay);
         card.appendChild(descriptionOverlay);
+    
+        cardContainer.appendChild(card);
+    
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = `В корзину`;
+        addToCartButton.className = "add-to-cart-button";
 
-        const basketButton = document.createElement("button");
-        basketButton.textContent = "Добавить в корзину";
-        basketButton.className = "basket-button";
-        card.appendChild(basketButton);
+        const priceSpan = document.createElement("span");
+        priceSpan.textContent = `${dish.price} ₽`;
+        priceSpan.className = "price"; 
 
-        cardsContainer.appendChild(card);
+        addToCartButton.appendChild(document.createElement("br")); 
+        addToCartButton.appendChild(priceSpan);
+
+        addToCartButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            priceSpan.style.display = "none";
+            addToCartButton.classList.add("clicked");
+        
+            setTimeout(function() {
+                addToCartButton.classList.remove("clicked");
+            }, 1000);
+        
+            setTimeout(function() {
+                priceSpan.style.display = "inline";
+                addToBasket(dish);
+            }, 1000);
+        
+            console.log(`Добавить ${dish.name} в корзину`);
+            event.stopPropagation();
+        });
+        
+        cardContainer.appendChild(addToCartButton);
+    
+        cardsContainer.appendChild(cardContainer);
     });
 
     const existingCardsContainer = document.querySelector(".container");
@@ -427,41 +489,68 @@ function showFranceDishes() {
     cardsContainer.className = "container";
 
     dishesFrance.forEach(dish => {
+        const cardContainer = document.createElement("div"); 
+        cardContainer.className = "card-container";
+    
         const card = document.createElement("div");
         card.className = "dish-card";
         card.setAttribute("data-category", dish.category);
-
+    
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "img-container";
+    
         const img = document.createElement("img");
         img.src = dish.image;
         img.alt = dish.name;
-
+    
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         overlay.textContent = dish.name;
-
+    
         const descriptionOverlay = document.createElement("div");
         descriptionOverlay.className = "description-overlay";
         descriptionOverlay.textContent = dish.description;
-        descriptionOverlay.style.display = "none";
-
-        card.addEventListener("mouseenter", function () {
-            descriptionOverlay.style.display = "block";
-        });
-
-        card.addEventListener("mouseleave", function () {
-            descriptionOverlay.style.display = "none";
-        });
-
-        card.appendChild(img);
+    
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
         card.appendChild(overlay);
         card.appendChild(descriptionOverlay);
+    
+        cardContainer.appendChild(card);
+    
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = `В корзину`;
+        addToCartButton.className = "add-to-cart-button";
 
-        const basketButton = document.createElement("button");
-        basketButton.textContent = "Добавить в корзину";
-        basketButton.className = "basket-button";
-        card.appendChild(basketButton);
+        const priceSpan = document.createElement("span");
+        priceSpan.textContent = `${dish.price} ₽`;
+        priceSpan.className = "price"; 
 
-        cardsContainer.appendChild(card);
+        addToCartButton.appendChild(document.createElement("br")); 
+        addToCartButton.appendChild(priceSpan);
+
+        addToCartButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            priceSpan.style.display = "none";
+            addToCartButton.classList.add("clicked");
+        
+            setTimeout(function() {
+                addToCartButton.classList.remove("clicked");
+            }, 1000);
+        
+            setTimeout(function() {
+                priceSpan.style.display = "inline";
+                addToBasket(dish);
+            }, 1000);
+        
+            console.log(`Добавить ${dish.name} в корзину`);
+            event.stopPropagation();
+        });
+        
+    
+        cardContainer.appendChild(addToCartButton);
+    
+        cardsContainer.appendChild(cardContainer);
     });
 
     const existingCardsContainer = document.querySelector(".container");
@@ -549,41 +638,68 @@ function showJapanDishes() {
     cardsContainer.className = "container";
 
     dishesJapan.forEach(dish => {
+        const cardContainer = document.createElement("div");
+        cardContainer.className = "card-container";
+    
         const card = document.createElement("div");
         card.className = "dish-card";
         card.setAttribute("data-category", dish.category);
-
+    
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "img-container";
+    
         const img = document.createElement("img");
         img.src = dish.image;
         img.alt = dish.name;
-
+    
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         overlay.textContent = dish.name;
-
+    
         const descriptionOverlay = document.createElement("div");
         descriptionOverlay.className = "description-overlay";
         descriptionOverlay.textContent = dish.description;
-        descriptionOverlay.style.display = "none";
-
-        card.addEventListener("mouseenter", function () {
-            descriptionOverlay.style.display = "block";
-        });
-
-        card.addEventListener("mouseleave", function () {
-            descriptionOverlay.style.display = "none";
-        });
-
-        card.appendChild(img);
+    
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
         card.appendChild(overlay);
         card.appendChild(descriptionOverlay);
+    
+        cardContainer.appendChild(card);
+    
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = `В корзину`;
+        addToCartButton.className = "add-to-cart-button";
 
-        const basketButton = document.createElement("button");
-        basketButton.textContent = "Добавить в корзину";
-        basketButton.className = "basket-button";
-        card.appendChild(basketButton);
+        const priceSpan = document.createElement("span");
+        priceSpan.textContent = `${dish.price} ₽`;
+        priceSpan.className = "price"; 
 
-        cardsContainer.appendChild(card);
+        addToCartButton.appendChild(document.createElement("br")); 
+        addToCartButton.appendChild(priceSpan);
+
+        addToCartButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            priceSpan.style.display = "none";
+            addToCartButton.classList.add("clicked");
+        
+            setTimeout(function() {
+                addToCartButton.classList.remove("clicked");
+            }, 1000);
+        
+            setTimeout(function() {
+                priceSpan.style.display = "inline";
+                addToBasket(dish);
+            }, 1000);
+        
+            console.log(`Добавить ${dish.name} в корзину`);
+            event.stopPropagation();
+        });
+        
+    
+        cardContainer.appendChild(addToCartButton);
+    
+        cardsContainer.appendChild(cardContainer);
     });
 
     const existingCardsContainer = document.querySelector(".container");
@@ -671,41 +787,68 @@ function showTaiDishes() {
     cardsContainer.className = "container";
 
     dishesTai.forEach(dish => {
+        const cardContainer = document.createElement("div");
+        cardContainer.className = "card-container";
+    
         const card = document.createElement("div");
         card.className = "dish-card";
         card.setAttribute("data-category", dish.category);
-
+    
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "img-container";
+    
         const img = document.createElement("img");
         img.src = dish.image;
         img.alt = dish.name;
-
+    
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         overlay.textContent = dish.name;
-
+    
         const descriptionOverlay = document.createElement("div");
         descriptionOverlay.className = "description-overlay";
         descriptionOverlay.textContent = dish.description;
-        descriptionOverlay.style.display = "none";
-
-        card.addEventListener("mouseenter", function () {
-            descriptionOverlay.style.display = "block";
-        });
-
-        card.addEventListener("mouseleave", function () {
-            descriptionOverlay.style.display = "none";
-        });
-
-        card.appendChild(img);
+    
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
         card.appendChild(overlay);
         card.appendChild(descriptionOverlay);
+    
+        cardContainer.appendChild(card);
+    
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = `В корзину`;
+        addToCartButton.className = "add-to-cart-button";
 
-        const basketButton = document.createElement("button");
-        basketButton.textContent = "Добавить в корзину";
-        basketButton.className = "basket-button";
-        card.appendChild(basketButton);
+        const priceSpan = document.createElement("span");
+        priceSpan.textContent = `${dish.price} ₽`;
+        priceSpan.className = "price"; 
 
-        cardsContainer.appendChild(card);
+        addToCartButton.appendChild(document.createElement("br")); 
+        addToCartButton.appendChild(priceSpan);
+
+        addToCartButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            priceSpan.style.display = "none";
+            addToCartButton.classList.add("clicked");
+        
+            setTimeout(function() {
+                addToCartButton.classList.remove("clicked");
+            }, 1000);
+        
+            setTimeout(function() {
+                priceSpan.style.display = "inline";
+                addToBasket(dish);
+            }, 1000);
+        
+            console.log(`Добавить ${dish.name} в корзину`);
+            event.stopPropagation();
+        });
+        
+    
+        cardContainer.appendChild(addToCartButton);
+    
+        cardsContainer.appendChild(cardContainer);
     });
 
     const existingCardsContainer = document.querySelector(".container");
@@ -793,41 +936,68 @@ function showMexicoDishes() {
     cardsContainer.className = "container";
 
     dishesMexico.forEach(dish => {
+        const cardContainer = document.createElement("div"); 
+        cardContainer.className = "card-container";
+    
         const card = document.createElement("div");
         card.className = "dish-card";
         card.setAttribute("data-category", dish.category);
-
+    
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "img-container";
+    
         const img = document.createElement("img");
         img.src = dish.image;
         img.alt = dish.name;
-
+    
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         overlay.textContent = dish.name;
-
+    
         const descriptionOverlay = document.createElement("div");
         descriptionOverlay.className = "description-overlay";
         descriptionOverlay.textContent = dish.description;
-        descriptionOverlay.style.display = "none";
-
-        card.addEventListener("mouseenter", function () {
-            descriptionOverlay.style.display = "block";
-        });
-
-        card.addEventListener("mouseleave", function () {
-            descriptionOverlay.style.display = "none";
-        });
-
-        card.appendChild(img);
+    
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
         card.appendChild(overlay);
         card.appendChild(descriptionOverlay);
+    
+        cardContainer.appendChild(card);
+    
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = `В корзину`;
+        addToCartButton.className = "add-to-cart-button";
 
-        const basketButton = document.createElement("button");
-        basketButton.textContent = "Добавить в корзину";
-        basketButton.className = "basket-button";
-        card.appendChild(basketButton);
+        const priceSpan = document.createElement("span");
+        priceSpan.textContent = `${dish.price} ₽`;
+        priceSpan.className = "price"; 
 
-        cardsContainer.appendChild(card);
+        addToCartButton.appendChild(document.createElement("br")); 
+        addToCartButton.appendChild(priceSpan);
+
+        addToCartButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            priceSpan.style.display = "none";
+            addToCartButton.classList.add("clicked");
+        
+            setTimeout(function() {
+                addToCartButton.classList.remove("clicked");
+            }, 1000);
+        
+            setTimeout(function() {
+                priceSpan.style.display = "inline";
+                addToBasket(dish);
+            }, 1000);
+        
+            console.log(`Добавить ${dish.name} в корзину`);
+            event.stopPropagation();
+        });
+        
+    
+        cardContainer.appendChild(addToCartButton);
+    
+        cardsContainer.appendChild(cardContainer);
     });
 
     const existingCardsContainer = document.querySelector(".container");

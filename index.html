@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кухни мира</title>
+    <title>Онлайн ресторан</title>
     <link rel="stylesheet" href="src/style.css">
     <script src="/src/main.ts"></script>
     <script src="/src/bascet.ts"></script>
@@ -40,7 +40,11 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <p>Содержимое вашего модального окна здесь...</p>
+          <div class="basket-items">
+            </div>
+            <div class="total-price">
+                Общая стоимость: <span id="total-price">0</span> ₽.
+            </div>
         </div>
     </div>
     <a href="#" class="basket-link">
