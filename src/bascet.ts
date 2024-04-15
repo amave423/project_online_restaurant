@@ -99,14 +99,13 @@ function toggleCheckoutAndClearButtonsVisibility() {
     }
 }
 
-
 const basketItemsContainer = document.querySelector('.basket-items');
 
 function addToBasket(dish: any) {
     const basketItemsContainer = document.querySelector('.basket-items');
 
     if (basketItemsContainer) {
-        const existingBasketItem = Array.from(basketItemsContainer.children).find((item: any) => {
+        const existingBasketItem = Array.from(basketItemsContainer.children).find((item) => {
             return item.querySelector('.item-name')?.textContent === dish.name;
         });
 
@@ -179,13 +178,11 @@ function addToBasket(dish: any) {
             basketItem.appendChild(priceInfo);
             basketItemsContainer.appendChild(basketItem);
             updateTotalPrice(parseFloat(dish.price));
-            localStorage.setItem('basketItems', basketItemsContainer.innerHTML);
-            localStorage.setItem(dish.name + '-quantity', '1');
         }
         updateBasketCount();
+        updateLocalStorage();
     }
 }
-
 
 function decreaseQuantity(quantityDisplay: HTMLElement, pricePerItem: number) {
     const currentQuantity = parseInt(quantityDisplay.textContent || '0');
