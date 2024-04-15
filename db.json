@@ -29,7 +29,7 @@
         { "name": "Ребрышки гриль", "image": "image/americadishes/rebra.jpg", "price": "400₽", "category": "Основные блюда", "description": "Сочные свиные ребрышки, запеченные на гриле и политые барбекю-соусом." },
         { "name": "Говяжий стейк", "image": "image/americadishes/steik.jpg", "price": "500₽", "category": "Основные блюда", "description": "Нежный говяжий стейк, подается с жареными овощами и картофелем по-деревенски." }
     ],
-    "dishesFrance": [
+    "franceDishes": [
         { "name": "Бёф бургиньон", "image": "image/francedishes/bugi.jpg", "price": "450", "category": "Основные блюда", "description": "Традиционное блюдо из говядины, тушеной в красном вине с овощами и специями." },
         { "name": "Кок-о-вен", "image": "image/francedishes/coco.jpg", "price": "380", "category": "Основные блюда", "description": "Ароматное блюдо из курицы, приготовленное в кокосовом молоке с пряностями." },
         { "name": "Утиное конфи", "image": "image/francedishes/confit.jpg", "price": "550", "category": "Основные блюда", "description": "Нежное утиное мясо, тушеное в собственном жире до готовности, подается с жареным картофелем." },
@@ -44,7 +44,7 @@
         { "name": "Вино", "image": "image/francedishes/wine.jpg", "price": "500", "category": "Напитки", "description": "Широкий выбор французских вин различных сортов и сортов." },
         { "name": "Устрицы", "image": "image/francedishes/ystrica.jpg", "price": "1200", "category": "Основные блюда", "description": "Свежие французские устрицы, идеальное дополнение к аперитиву." }
     ],
-    "dishesJapan": [
+    "japanDishes": [
         { "name": "Рамен", "image": "image/japandishes/ramen.jpg", "price": "350", "category": "Основные блюда", "description": "Популярное японское блюдо, состоящее из мясного бульона, лапши, мяса, яйца и овощей." },
         { "name": "Дораяки", "image": "image/japandishes/doraiaki.jpg", "price": "150", "category": "Десерты", "description": "Традиционные японские пирожки, состоящие из двух слоев пышного блинчика с начинкой из красного варенья." },
         { "name": "Мочи", "image": "image/japandishes/mochi.jpg", "price": "200", "category": "Десерты", "description": "Клейкие рисовые пирожки, обычно наполненные сладким начинком и покрытые порошком из риса." },
@@ -59,7 +59,7 @@
         { "name": "Удон", "image": "image/japandishes/udon.jpg", "price": "400", "category": "Основные блюда", "description": "Традиционные японские лапша из пшеничной муки, обычно подаются в горячем бульоне с различными добавками." },
         { "name": "Умешу", "image": "image/japandishes/umeshu.jpg", "price": "350", "category": "Напитки", "description": "Сладкий японский алкоголь, изготовленный из слив, который часто подают в качестве десерта." }
     ],
-    "dishesMexico": [
+    "mexicoDishes": [
         { "name": "Энчилада", "image": "image/mexicodishes/enchi.jpg", "price": "450", "category": "Основные блюда", "description": "Традиционное мексиканское блюдо, состоящее из тортильи, начиненной мясом, сыром и соусом." },
         { "name": "Арроз кон пойо", "image": "image/mexicodishes/arroz.jpg", "price": "250", "category": "Десерты", "description": "Мексиканский рис с курицей, приправленный специями и травами." },
         { "name": "Мексиканское пиво", "image": "image/mexicodishes/beer.jpg", "price": "200", "category": "Напитки", "description": "Популярные мексиканские марки пива, такие как Corona и Dos Equis." },
@@ -73,7 +73,7 @@
         { "name": "Такос", "image": "image/mexicodishes/takos.jpg", "price": "250", "category": "Основные блюда", "description": "Традиционные мексиканские тортильи, начиненные мясом, овощами и соусами." },
         { "name": "Трес лечес", "image": "image/mexicodishes/tres.jpg", "price": "280", "category": "Десерты", "description": "Мексиканский десерт, состоящий из трёх молочных сладостей: конденсированного молока, сгущённого молока и крема." }
     ],
-    "dishesTai": [
+    "taiDishes": [
         { "name": "Пад-тай", "image": "image/taidishes/pad.jpg", "price": "400", "category": "Основные блюда", "description": "Тайское блюдо, состоящее из обжаренных лапши с курицей, креветками или твердым тофу, приправленных соусом тамаринд, рыбным соусом, кунжутом, чесноком, красным перцем и яйцом." },
         { "name": "Тапиока", "image": "image/taidishes/pud.jpg", "price": "250", "category": "Десерты", "description": "Традиционный десерт, приготовленный из тапиоки, молока и сахара, обычно подаётся с кокосовым молоком и фруктами." },
         { "name": "Кокосовый сок", "image": "image/taidishes/kokos.jpg", "price": "150", "category": "Напитки", "description": "Свежий сок, который извлекается из зеленых или спелых кокосов, популярный напиток в Таиланде." },
