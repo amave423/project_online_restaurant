@@ -5,31 +5,21 @@ body, html {
 
 body{
     background-color: #4bab502b;
-}
-
-article {
-    margin: 0;
-    padding: 0;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
-    margin-top: -20px;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .container {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 71%;
-    background: none;
-    margin-top: 110px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 110px auto 0;
 }
 
 .card {
-    width: calc(33.33% - 5%);
-    margin: 2.5%;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
@@ -228,8 +218,7 @@ article {
 .card-container {
     display: flex;
     flex-direction: column; 
-    width: 400px;
-    margin: 10px 16px;
+    width: 100%;
 }
 
 .dish-card {
@@ -480,19 +469,16 @@ article {
         width: 90%;
     }
 
-    .card {
-        width: calc(50% - 10%);
-        margin: 5%;
-    }
-
     .overlay {
+        position: absolute;
         bottom: 0;
+        left: 0;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.5);
         color: white;
-        padding: 0px;
+        padding: 10px;
         text-align: center;
-        font-size: 15px;
+        font-size: 26px;
     }
 
     .back-button {
