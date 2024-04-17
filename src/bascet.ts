@@ -4,77 +4,86 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeBtn = document.querySelector('.close');
 
     if (basketLink && modal && closeBtn) {
-        basketLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            if (modal.style) {
-                modal.style.display = 'block';
-                toggleCheckoutAndClearButtonsVisibility();
-            }
-        });
-
-        closeBtn.addEventListener('click', () => {
-            if (modal.style) {
-                modal.style.display = 'none';
-            }
-        });
+        basketLink.addEventListener('click', handleBasketLinkClick);
+        closeBtn.addEventListener('click', handleCloseButtonClick);
     }
 
-    let basketItemsContainer = document.querySelector('.basket-items');
+    let basketItemsContainer: HTMLElement | null = document.querySelector('.basket-items');
     if (!basketItemsContainer) {
-        basketItemsContainer = document.createElement('div');
-        basketItemsContainer.classList.add('basket-items');
+        basketItemsContainer = createBasketItemsContainer();
         document.body.appendChild(basketItemsContainer);
     }
 
     const storedBasketItems = localStorage.getItem('basketItems');
     if (storedBasketItems) {
-        basketItemsContainer.innerHTML = storedBasketItems;
-        updateTotalPrice(0);
-        toggleCheckoutAndClearButtonsVisibility();
-        updateBasketCount();
-        updateTotalPriceFromItems();
-        attachQuantityEventHandlers();
+        initializeBasketFromStorage(storedBasketItems);
     }
 });
+
+function handleBasketLinkClick(event: Event) {
+    event.preventDefault();
+    const modal = document.getElementById('myModal');
+    if (modal && modal.style) {
+        modal.style.display = 'block';
+        toggleCheckoutAndClearButtonsVisibility();
+    }
+}
+
+function handleCloseButtonClick() {
+    const modal = document.getElementById('myModal');
+    if (modal && modal.style) {
+        modal.style.display = 'none';
+    }
+}
+
+function createBasketItemsContainer(): HTMLElement {
+    const basketItemsContainer = document.createElement('div');
+    basketItemsContainer.classList.add('basket-items');
+    return basketItemsContainer;
+}
+
+function initializeBasketFromStorage(storedBasketItems: string) {
+    const basketItemsContainer = document.querySelector('.basket-items');
+    if (basketItemsContainer) {
+        basketItemsContainer.innerHTML = storedBasketItems;
+        updateBasket();
+    }
+}
 
 function attachQuantityEventHandlers() {
     const increaseButtons = document.querySelectorAll('.quantity-counter button:last-child');
     const decreaseButtons = document.querySelectorAll('.quantity-counter button:first-child');
 
     increaseButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const quantityDisplay = button.parentNode?.querySelector('span');
-            if (quantityDisplay) {
-                const pricePerItem = parseFloat(button.closest('.basket-item')?.getAttribute('data-price-per-item')!);
-                increaseQuantity(quantityDisplay, pricePerItem);
-            }
-        });
+        button.addEventListener('click', handleIncreaseButtonClick);
     });
 
     decreaseButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const quantityDisplay = button.parentNode?.querySelector('span');
-            if (quantityDisplay) {
-                const pricePerItem = parseFloat(button.closest('.basket-item')?.getAttribute('data-price-per-item')!);
-                decreaseQuantity(quantityDisplay, pricePerItem);
-            }
-        });
+        button.addEventListener('click', handleDecreaseButtonClick);
     });
 }
 
-function updateTotalPriceFromItems() {
-    let totalPrice = 0;
-    const basketItems = document.querySelectorAll('.basket-item');
-    basketItems.forEach(item => {
-        const totalPriceElement = item.querySelector('.total-price');
-        if (totalPriceElement) {
-            totalPrice += parseFloat(totalPriceElement.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
-        }
-    });
-    const totalPriceElement = document.getElementById('total-price');
-    if (totalPriceElement) {
-        totalPriceElement.textContent = totalPrice.toString();
+function handleIncreaseButtonClick(this: HTMLElement) {
+    const quantityDisplay = this.parentNode?.querySelector('span');
+    if (quantityDisplay) {
+        const pricePerItem = parseFloat(this.closest('.basket-item')?.getAttribute('data-price-per-item')!);
+        increaseQuantity(quantityDisplay, pricePerItem);
     }
+}
+
+function handleDecreaseButtonClick(this: HTMLElement) {
+    const quantityDisplay = this.parentNode?.querySelector('span');
+    if (quantityDisplay) {
+        const pricePerItem = parseFloat(this.closest('.basket-item')?.getAttribute('data-price-per-item')!);
+        decreaseQuantity(quantityDisplay, pricePerItem);
+    }
+}
+
+function updateBasket() {
+    updateTotalPriceFromItems();
+    toggleCheckoutAndClearButtonsVisibility();
+    updateBasketCount();
+    attachQuantityEventHandlers();
 }
 
 function toggleCheckoutAndClearButtonsVisibility() {
@@ -83,105 +92,119 @@ function toggleCheckoutAndClearButtonsVisibility() {
     const checkoutButton = document.querySelector('.checkout-button');
 
     if (basketItems.length === 0) {
-        if (clearBasketButton) {
-            clearBasketButton.classList.add('fade-out');
-        }
-        if (checkoutButton) {
-            checkoutButton.classList.add('fade-out');
-        }
+        clearBasketButton?.classList.add('fade-out');
+        checkoutButton?.classList.add('fade-out');
     } else {
-        if (clearBasketButton) {
-            clearBasketButton.classList.remove('fade-out');
-        }
-        if (checkoutButton) {
-            checkoutButton.classList.remove('fade-out');
-        }
+        clearBasketButton?.classList.remove('fade-out');
+        checkoutButton?.classList.remove('fade-out');
     }
 }
 
-const basketItemsContainer = document.querySelector('.basket-items');
-
-function addToBasket(dish: any) {
+function addToBasket(dish: { name: string; image: string; price: string }) {
     const basketItemsContainer = document.querySelector('.basket-items');
 
     if (basketItemsContainer) {
-        const existingBasketItem = Array.from(basketItemsContainer.children).find((item) => {
-            return item.querySelector('.item-name')?.textContent === dish.name;
-        });
+        const existingBasketItem = Array.from(basketItemsContainer.children).find(item =>
+            (item.querySelector('.item-name') as HTMLElement)?.textContent === dish.name
+        );
 
         if (existingBasketItem) {
-            const quantityDisplay = existingBasketItem.querySelector('.quantity-counter span');
-            if (quantityDisplay) {
-                const currentQuantity = parseInt(quantityDisplay.textContent || '0');
-                quantityDisplay.textContent = (currentQuantity + 1).toString();
-            }
-            const totalPriceElement = existingBasketItem.querySelector('.total-price');
-            if (totalPriceElement) {
-                const currentTotal = parseFloat(totalPriceElement.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
-                const newTotal = currentTotal + parseFloat(dish.price);
-                totalPriceElement.textContent = `Общая стоимость: ${newTotal.toFixed(0)} ₽`;
-            }
-            updateTotalPrice(parseFloat(dish.price));
+            updateExistingBasketItem(existingBasketItem, parseFloat(dish.price));
         } else {
-            const basketItem = document.createElement('div');
-            basketItem.classList.add('basket-item');
-
-            basketItem.setAttribute('data-price-per-item', dish.price);
-
-            const itemImage = document.createElement('img');
-            itemImage.src = dish.image;
-            itemImage.alt = dish.name;
-            itemImage.width = 120;
-            itemImage.height = 80;
-            basketItem.appendChild(itemImage);
-
-            const itemName = document.createElement('div');
-            itemName.classList.add('item-name');
-            itemName.textContent = dish.name;
-            basketItem.appendChild(itemName);
-
-            const quantityCounter = document.createElement('div');
-            quantityCounter.classList.add('quantity-counter');
-
-            const decreaseButton = document.createElement('button');
-            decreaseButton.textContent = '-';
-            decreaseButton.addEventListener('click', () => {
-                decreaseQuantity(quantityDisplay, parseFloat(dish.price));
-            });
-            quantityCounter.appendChild(decreaseButton);
-
-            const quantityDisplay = document.createElement('span');
-            quantityDisplay.textContent = '1';
-            quantityCounter.appendChild(quantityDisplay);
-
-            const increaseButton = document.createElement('button');
-            increaseButton.textContent = '+';
-            increaseButton.addEventListener('click', () => {
-                increaseQuantity(quantityDisplay, parseFloat(dish.price));
-            });
-            quantityCounter.appendChild(increaseButton);
-
-            basketItem.appendChild(quantityCounter);
-
-            const priceInfo = document.createElement('div');
-            priceInfo.classList.add('price-info');
-            
-            const pricePerItem = document.createElement('div');
-            pricePerItem.textContent = `Цена за 1 единицу: ${dish.price} ₽`;
-            priceInfo.appendChild(pricePerItem);
-
-            const totalPrice = document.createElement('div');
-            totalPrice.classList.add('total-price');
-            totalPrice.textContent = `Общая стоимость: ${dish.price} ₽`;
-            priceInfo.appendChild(totalPrice);
-
-            basketItem.appendChild(priceInfo);
-            basketItemsContainer.appendChild(basketItem);
-            updateTotalPrice(parseFloat(dish.price));
+            createNewBasketItem(dish);
         }
-        updateBasketCount();
+        updateBasket();
         updateLocalStorage();
     }
+}
+
+function updateExistingBasketItem(existingBasketItem: Element, pricePerItem: number) {
+    const quantityDisplay = existingBasketItem.querySelector('.quantity-counter span');
+    if (quantityDisplay) {
+        const currentQuantity = parseInt(quantityDisplay.textContent || '0');
+        quantityDisplay.textContent = (currentQuantity + 1).toString();
+    }
+    const totalPriceElement = existingBasketItem.querySelector('.total-price');
+    if (totalPriceElement) {
+        const currentTotal = parseFloat(totalPriceElement.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
+        const newTotal = currentTotal + parseFloat(pricePerItem.toString());
+        totalPriceElement.textContent = `Общая стоимость: ${newTotal.toFixed(0)} ₽`;
+    }
+}
+
+function createNewBasketItem(dish: { name: string; image: string; price: string }) {
+    const basketItemsContainer = document.querySelector('.basket-items');
+    if (basketItemsContainer) {
+        const basketItem = document.createElement('div');
+        basketItem.classList.add('basket-item');
+        basketItem.setAttribute('data-price-per-item', dish.price);
+
+        const itemImage = document.createElement('img');
+        itemImage.src = dish.image;
+        itemImage.alt = dish.name;
+        itemImage.width = 120;
+        itemImage.height = 80;
+        basketItem.appendChild(itemImage);
+
+        const itemName = document.createElement('div');
+        itemName.classList.add('item-name');
+        itemName.textContent = dish.name;
+        basketItem.appendChild(itemName);
+
+        const quantityCounter = document.createElement('div');
+        quantityCounter.classList.add('quantity-counter');
+
+        const decreaseButton = document.createElement('button');
+        decreaseButton.textContent = '-';
+        decreaseButton.addEventListener('click', handleDecreaseButtonClick);
+        quantityCounter.appendChild(decreaseButton);
+
+        const quantityDisplay = document.createElement('span');
+        quantityDisplay.textContent = '1';
+        quantityCounter.appendChild(quantityDisplay);
+
+        const increaseButton = document.createElement('button');
+        increaseButton.textContent = '+';
+        increaseButton.addEventListener('click', handleIncreaseButtonClick);
+        quantityCounter.appendChild(increaseButton);
+
+        basketItem.appendChild(quantityCounter);
+
+        const priceInfo = document.createElement('div');
+        priceInfo.classList.add('price-info');
+
+        const pricePerItemElement = document.createElement('div');
+        pricePerItemElement.textContent = `Цена за 1 единицу: ${dish.price} ₽`;
+        priceInfo.appendChild(pricePerItemElement);
+
+        const totalPriceElement = document.createElement('div');
+        totalPriceElement.classList.add('total-price');
+        totalPriceElement.textContent = `Общая стоимость: ${dish.price} ₽`;
+        priceInfo.appendChild(totalPriceElement);
+
+        basketItem.appendChild(priceInfo);
+
+        basketItemsContainer.appendChild(basketItem);
+    }
+}
+
+function updateLocalStorage() {
+    const basketItems = document.querySelectorAll('.basket-item');
+    const serializedBasketItems = Array.from(basketItems).map(item => item.outerHTML).join('');
+    localStorage.setItem('basketItems', serializedBasketItems);
+}
+
+function increaseQuantity(quantityDisplay: HTMLElement, pricePerItem: number) {
+    const currentQuantity = parseInt(quantityDisplay.textContent || '0');
+    quantityDisplay.textContent = (currentQuantity + 1).toString();
+    const totalPriceElement = quantityDisplay.closest('.basket-item')?.querySelector('.total-price');
+    if (totalPriceElement) {
+        const currentTotal = parseFloat(totalPriceElement.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
+        totalPriceElement.textContent = `Общая стоимость: ${(currentTotal + pricePerItem).toFixed(0)} ₽`;
+    }
+    updateTotalPrice(pricePerItem);
+    updateBasketCount();
+    updateLocalStorage(); 
 }
 
 function decreaseQuantity(quantityDisplay: HTMLElement, pricePerItem: number) {
@@ -211,23 +234,19 @@ function decreaseQuantity(quantityDisplay: HTMLElement, pricePerItem: number) {
     }
 }
 
-function updateLocalStorage() {
+function updateTotalPriceFromItems() {
+    let totalPrice = 0;
     const basketItems = document.querySelectorAll('.basket-item');
-    const serializedBasketItems = Array.from(basketItems).map(item => item.outerHTML).join('');
-    localStorage.setItem('basketItems', serializedBasketItems);
-}
-
-function increaseQuantity(quantityDisplay: HTMLElement, pricePerItem: number) {
-    const currentQuantity = parseInt(quantityDisplay.textContent || '0');
-    quantityDisplay.textContent = (currentQuantity + 1).toString();
-    const totalPriceElement = quantityDisplay.closest('.basket-item')?.querySelector('.total-price');
+    basketItems.forEach(item => {
+        const totalPriceElement = item.querySelector('.total-price');
+        if (totalPriceElement) {
+            totalPrice += parseFloat(totalPriceElement.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
+        }
+    });
+    const totalPriceElement = document.getElementById('total-price');
     if (totalPriceElement) {
-        const currentTotal = parseFloat(totalPriceElement.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
-        totalPriceElement.textContent = `Общая стоимость: ${(currentTotal + pricePerItem).toFixed(0)} ₽`;
+        totalPriceElement.textContent = totalPrice.toString();
     }
-    updateTotalPrice(pricePerItem);
-    updateBasketCount();
-    updateLocalStorage(); 
 }
 
 function updateBasketCount() {
@@ -278,7 +297,6 @@ function clearBasket() {
         basketCountElement.textContent = '0';
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const clearBasketButton = document.querySelector('.clear-basket-button');
