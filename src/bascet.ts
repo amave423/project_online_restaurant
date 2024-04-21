@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
         closeBtn.addEventListener('click', handleCloseButtonClick);
     }
 
-    let basketItemsContainer: HTMLElement | null = document.querySelector('.basket-items');
+    let basketItemsContainer = document.querySelector('.basket-items') as HTMLElement | null;
     if (!basketItemsContainer) {
         basketItemsContainer = createBasketItemsContainer();
         document.body.appendChild(basketItemsContainer);
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function handleBasketLinkClick(event: Event) {
     event.preventDefault();
     const modal = document.getElementById('myModal');
-    if (modal && modal.style) {
+    if (modal) {
         modal.style.display = 'block';
         toggleCheckoutAndClearButtonsVisibility();
     }
@@ -31,7 +31,7 @@ function handleBasketLinkClick(event: Event) {
 
 function handleCloseButtonClick() {
     const modal = document.getElementById('myModal');
-    if (modal && modal.style) {
+    if (modal) {
         modal.style.display = 'none';
     }
 }
@@ -54,25 +54,25 @@ function attachQuantityEventHandlers() {
     const increaseButtons = document.querySelectorAll('.quantity-counter button:last-child');
     const decreaseButtons = document.querySelectorAll('.quantity-counter button:first-child');
 
-    increaseButtons.forEach(button => {
+    increaseButtons.forEach((button: Element) => {
         button.addEventListener('click', handleIncreaseButtonClick);
     });
 
-    decreaseButtons.forEach(button => {
+    decreaseButtons.forEach((button: Element) => {
         button.addEventListener('click', handleDecreaseButtonClick);
     });
 }
 
-function handleIncreaseButtonClick(this: HTMLElement) {
-    const quantityDisplay = this.parentNode?.querySelector('span');
+function handleIncreaseButtonClick(this: HTMLButtonElement) {
+    const quantityDisplay = this.parentNode?.querySelector('span') as HTMLElement;
     if (quantityDisplay) {
         const pricePerItem = parseFloat(this.closest('.basket-item')?.getAttribute('data-price-per-item')!);
         increaseQuantity(quantityDisplay, pricePerItem);
     }
 }
 
-function handleDecreaseButtonClick(this: HTMLElement) {
-    const quantityDisplay = this.parentNode?.querySelector('span');
+function handleDecreaseButtonClick(this: HTMLButtonElement) {
+    const quantityDisplay = this.parentNode?.querySelector('span') as HTMLElement;
     if (quantityDisplay) {
         const pricePerItem = parseFloat(this.closest('.basket-item')?.getAttribute('data-price-per-item')!);
         decreaseQuantity(quantityDisplay, pricePerItem);
@@ -119,7 +119,7 @@ function addToBasket(dish: { name: string; image: string; price: string }) {
 }
 
 function updateExistingBasketItem(existingBasketItem: Element, pricePerItem: number) {
-    const quantityDisplay = existingBasketItem.querySelector('.quantity-counter span');
+    const quantityDisplay = existingBasketItem.querySelector('.quantity-counter span') as HTMLElement;
     if (quantityDisplay) {
         const currentQuantity = parseInt(quantityDisplay.textContent || '0');
         quantityDisplay.textContent = (currentQuantity + 1).toString();
@@ -236,12 +236,8 @@ function decreaseQuantity(quantityDisplay: HTMLElement, pricePerItem: number) {
 
 function updateTotalPriceFromItems() {
     let totalPrice = 0;
-    const basketItems = document.querySelectorAll('.basket-item');
-    basketItems.forEach(item => {
-        const totalPriceElement = item.querySelector('.total-price');
-        if (totalPriceElement) {
-            totalPrice += parseFloat(totalPriceElement.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
-        }
+    document.querySelectorAll('.basket-item .total-price').forEach(element => {
+        totalPrice += parseFloat(element.textContent!.replace('Общая стоимость: ', '').replace(' ₽', ''));
     });
     const totalPriceElement = document.getElementById('total-price');
     if (totalPriceElement) {
@@ -250,13 +246,9 @@ function updateTotalPriceFromItems() {
 }
 
 function updateBasketCount() {
-    const basketItems = document.querySelectorAll('.basket-item');
     let totalCount = 0;
-    basketItems.forEach(item => {
-        const quantityDisplay = item.querySelector('.quantity-counter span');
-        if (quantityDisplay) {
-            totalCount += parseInt(quantityDisplay.textContent || '0');
-        }
+    document.querySelectorAll('.basket-item .quantity-counter span').forEach(element => {
+        totalCount += parseInt(element.textContent || '0');
     });
     const basketCountElement = document.querySelector('.basket-count');
     if (basketCountElement) {
@@ -276,8 +268,7 @@ function clearBasket() {
     const totalPriceElement = document.getElementById('total-price');
 
     if (basketItemsContainer) {
-        const basketItems = basketItemsContainer.querySelectorAll('.basket-item');
-        basketItems.forEach(item => {
+        basketItemsContainer.querySelectorAll('.basket-item').forEach(item => {
             item.classList.add('fade-out');
         });
 
@@ -285,7 +276,7 @@ function clearBasket() {
             basketItemsContainer.innerHTML = '';
             localStorage.removeItem('basketItems');
             toggleCheckoutAndClearButtonsVisibility();
-        }, 300); 
+        }, 300);
     }
 
     if (totalPriceElement) {
@@ -299,21 +290,13 @@ function clearBasket() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const clearBasketButton = document.querySelector('.clear-basket-button');
-    if (clearBasketButton) {
-        clearBasketButton.addEventListener('click', function() {
-            clearBasket();
-        });
-    }
+    document.querySelector('.clear-basket-button')?.addEventListener('click', clearBasket);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    const checkoutButton = document.querySelector('.checkout-button');
-    if (checkoutButton) {
-        checkoutButton.addEventListener('click', function() {
-            alert('Ваш заказ успешно оформлен!');
-            clearBasket();
-            toggleCheckoutAndClearButtonsVisibility();
-        });
-    }
+    document.querySelector('.checkout-button')?.addEventListener('click', function() {
+        alert('Ваш заказ успешно оформлен!');
+        clearBasket();
+        toggleCheckoutAndClearButtonsVisibility();
+    });
 });
